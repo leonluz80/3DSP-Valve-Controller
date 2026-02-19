@@ -41,5 +41,10 @@ Open *Window*->*Show view*->*SWV*->*SWV ITM Data Console*. From there, click on 
 #### (Nothing is happening...)
 Make sure that your hardware is set up correctly and that the switch (S4) on the adapter board is configured to either SPI or UART operation mode. See the [Anybus® CompactCom™ Adapter Board for STM32 Nucleo™ - Installation Guide](https://hmsnetworks.blob.core.windows.net/nlw/docs/default-source/products/anybus/manuals-and-guides---manuals/hms-scm-1202-236.pdf?sfvrsn=90594caf_4) for more details.
 
+#### Weird behaviour?
+Make sure that the hardware matches the configuration in src/io_expander/io_config.c :
+- Instances of type MCP23S17_Bus_t are serially connected PCBs that share the same SPI bus. If multiple PCB's are connected, make sure to adjust the adress bytes in the code and on the DIP switch on each PCB.
+- Instances of type MCP23S17_t are the IO Expanders. Each PCB hosts two of them.
+
 
 
