@@ -31,14 +31,15 @@ MOSI -> PC12 (green)
 GND -> GND (brown)
 ### Step 3. Power the Valve Driver v1.0
 Connect 24V and GND to power the valves.
-### Step 3. Open the project
+### Step 4. Open the project
 Find the **.project** file in the repository root and open it with STM32CubeIDE.
-### Step 4. Build and run
+### Step 5. Build and run
 Select *Run*->*Debug* to build and run the configuration called "Debug". Use the function keys to step through or run the debug application.
-### Step 5. See debug print-out
+### Step 6. See debug print-out
 Open *Window*->*Show view*->*SWV*->*SWV ITM Data Console*. From there, click on the wrench icon to open the Serial Wire Viewer settings and enable the 0th ITM Stimulus port (rightmost checkbox). Then, press the red circle "Start Trace" to view the debug print-out from the example application.
 
 #### (Nothing is happening...)
 Make sure that your hardware is set up correctly and that the switch (S4) on the adapter board is configured to either SPI or UART operation mode. See the [Anybus® CompactCom™ Adapter Board for STM32 Nucleo™ - Installation Guide](https://hmsnetworks.blob.core.windows.net/nlw/docs/default-source/products/anybus/manuals-and-guides---manuals/hms-scm-1202-236.pdf?sfvrsn=90594caf_4) for more details.
+
 
 
