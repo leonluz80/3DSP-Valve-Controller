@@ -3,7 +3,6 @@
 /* Registers */
 #define MCP_IODIRA 0x00
 #define MCP_IODIRB 0x01
-#define MCP_IOCON 0x0A
 #define MCP_GPIOA 0x12
 #define MCP_GPIOB 0x13
 
@@ -43,9 +42,10 @@ static void write_reg_broadcast(MCP23S17_Bus_t *bus, uint8_t reg,
 }
 
 void MCP23S17_BusInit(MCP23S17_Bus_t *bus) {
-  /* Enable hardware addressing on ALL MCP23S17 sharing this CS */
   uint8_t iocon = (uint8_t)(IOCON_HAEN | IOCON_SEQOP);
-  write_reg_broadcast(bus, MCP_IOCON, iocon);
+
+  write_reg_broadcast(bus, 0x0A, iocon);
+  write_reg_broadcast(bus, 0x0B, iocon);
 }
 
 void MCP23S17_Init(MCP23S17_t *dev) {
@@ -76,6 +76,10 @@ void MCP23S17_Write16(MCP23S17_t *dev, uint16_t value) {
 
   write_reg(dev, MCP_GPIOA, dev->porta_shadow);
   write_reg(dev, MCP_GPIOB, dev->portb_shadow);
+}
+
+uint16_t MCP23S17_GetShadow16(const MCP23S17_t *dev) {
+  return (uint16_t)dev->porta_shadow | ((uint16_t)dev->portb_shadow << 8);
 }
 
 void MCP23S17_SetAll(MCP23S17_t *dev, uint8_t state) {

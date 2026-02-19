@@ -1,4 +1,4 @@
-#include "app_io.h"
+#include "io_config.h"
 #include "mcp23s17.h"
 
 extern SPI_HandleTypeDef hspi3;

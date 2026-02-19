@@ -27,6 +27,9 @@ void MCP23S17_WritePortB(MCP23S17_t *dev, uint8_t value);
 /* Write all 16 pins with bitmask: bits 0..7->A, 8..15->B */
 void MCP23S17_Write16(MCP23S17_t *dev, uint16_t value);
 
+/* Get shadow of all 16 bits */
+uint16_t MCP23S17_GetShadow16(const MCP23S17_t *dev);
+
 /* Set all pins HIGH(1) or LOW(0) */
 void MCP23S17_SetAll(MCP23S17_t *dev, uint8_t state);
 

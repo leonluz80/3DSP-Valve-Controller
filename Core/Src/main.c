@@ -37,7 +37,7 @@
 #include "abcc_hardware_abstraction_aux.h"
 #include "abcc_api.h"
 
-#include "app_io.h"
+#include "io_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
