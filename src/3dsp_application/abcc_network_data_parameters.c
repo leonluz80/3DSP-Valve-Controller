@@ -16,6 +16,7 @@
 
 #include "abcc_api.h"
 
+#include "io_config.h"
 #include "mcp23s17.h"
 
 #if (  ABCC_CFG_STRUCT_DATA_TYPE_ENABLED || ABCC_CFG_ADI_GET_SET_CALLBACK_ENABLED )
@@ -74,10 +75,11 @@ extern MCP23S17_t pcb0_u1;
 void ABCC_API_CbfCyclicalProcessing(void) {
 
   if (ABCC_API_AnbState() == ABP_ANB_STATE_PROCESS_ACTIVE) {
+    uint32_t filtered_bits = appl_1input_bits & VALVE_OUTPUT_MASK;
 
-    if (appl_1input_bits != appl_2shadow_bits) {
-      uint16_t dev0_bits = (uint16_t)(appl_1input_bits & 0xFFFFu);
-      uint16_t dev1_bits = (uint16_t)((appl_1input_bits >> 16) & 0xFFFFu);
+    if (filtered_bits != appl_2shadow_bits) {
+      uint16_t dev0_bits = (uint16_t)(filtered_bits & 0xFFFFu);
+      uint16_t dev1_bits = (uint16_t)((filtered_bits >> 16) & 0xFFFFu);
 
       MCP23S17_Write16(&pcb0_u0, dev0_bits);
       MCP23S17_Write16(&pcb0_u1, dev1_bits);
@@ -89,8 +91,8 @@ void ABCC_API_CbfCyclicalProcessing(void) {
   } 
   
   else {
-    MCP23S17_SetAll(&pcb0_u0, 1);
-    MCP23S17_SetAll(&pcb0_u1, 1);
+    MCP23S17_SetAll(&pcb0_u0, 0);
+    MCP23S17_SetAll(&pcb0_u1, 0);
 
     appl_2shadow_bits = 0;
   }
